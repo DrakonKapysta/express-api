@@ -1,0 +1,16 @@
+{
+  "name": "express-api",
+  "version": "1.0.0",
+  "description": "express-api for integration with services",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oleh Matyiokin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
