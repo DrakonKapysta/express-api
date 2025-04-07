@@ -2,10 +2,11 @@
   "name": "express-api",
   "version": "1.0.0",
   "description": "express-api for integration with services",
-  "main": "index.js",
-  "type": "module",
+  "main": "main.js",
+  "type": "commonjs",
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "node ./dist/main.js",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Oleh Matyiokin",
