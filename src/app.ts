@@ -9,32 +9,32 @@ import { IUserController } from "./user/user.controller.interface";
 
 @injectable()
 export class App {
-  app: Express;
-  server: Server;
-  port: number;
+	app: Express;
+	server: Server;
+	port: number;
 
-  constructor(
-    @inject(TYPES.ILogger) private logger: ILogger,
-    @inject(TYPES.UserController) private userController: IUserController,
-    @inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter
-  ) {
-    this.app = express();
-    this.port = 8000;
-  }
+	constructor(
+		@inject(TYPES.ILogger) private logger: ILogger,
+		@inject(TYPES.UserController) private userController: IUserController,
+		@inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter,
+	) {
+		this.app = express();
+		this.port = 8000;
+	}
 
-  public useRoutes() {
-    this.app.use("/users", this.userController.getRouter());
-  }
+	public useRoutes(): void {
+		this.app.use("/users", this.userController.getRouter());
+	}
 
-  public useExeptionFilters() {
-    this.app.use(this.exeptionFilter.catch.bind(this.exeptionFilter));
-  }
+	public useExeptionFilters(): void {
+		this.app.use(this.exeptionFilter.catch.bind(this.exeptionFilter));
+	}
 
-  public async init() {
-    this.useRoutes();
-    this.useExeptionFilters();
-    this.server = this.app.listen(this.port, () =>
-      this.logger.log(`App is running on port ${this.port}`)
-    );
-  }
+	public async init(): Promise<void> {
+		this.useRoutes();
+		this.useExeptionFilters();
+		this.server = this.app.listen(this.port, () =>
+			this.logger.log(`App is running on port ${this.port}`),
+		);
+	}
 }

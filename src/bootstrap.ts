@@ -4,12 +4,17 @@ import { appModule } from "./main";
 import { TYPES } from "./types";
 import { App } from "./app";
 
-export async function bootstrap() {
-  const appContainer = new Container();
-  appContainer.load(appModule);
+export interface IBootstrap {
+	appContainer: Container;
+	app: App;
+}
 
-  const app = appContainer.get<App>(TYPES.Application);
-  await app.init();
+export async function bootstrap(): Promise<IBootstrap> {
+	const appContainer = new Container();
+	appContainer.load(appModule);
 
-  return { appContainer, app };
+	const app = appContainer.get<App>(TYPES.Application);
+	await app.init();
+
+	return { appContainer, app };
 }
