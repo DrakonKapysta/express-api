@@ -1,23 +1,32 @@
 {
-  "name": "express-api",
-  "version": "1.0.0",
-  "description": "express-api for integration with services",
-  "main": "main.js",
-  "type": "commonjs",
-  "scripts": {
-    "start": "node ./dist/main.js",
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Oleh Matyiokin",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^5.1.0",
-    "inversify": "^7.5.0",
-    "reflect-metadata": "^0.2.2",
-    "tslog": "^4.9.3"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.1"
-  }
+	"name": "express-api",
+	"version": "1.0.0",
+	"description": "express-api for integration with services",
+	"main": "main.js",
+	"type": "commonjs",
+	"scripts": {
+		"start": "node ./dist/main.js",
+		"lint": "eslint \"./src/**/*.{ts,tsx}\"",
+		"lint:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix",
+		"build": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Oleh Matyiokin",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^5.1.0",
+		"inversify": "^7.5.0",
+		"reflect-metadata": "^0.2.2",
+		"tslog": "^4.9.3"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.1",
+		"@typescript-eslint/eslint-plugin": "^8.29.1",
+		"@typescript-eslint/parser": "^8.29.1",
+		"eslint": "^9.24.0",
+		"eslint-config-prettier": "^10.1.2",
+		"eslint-plugin-prettier": "^5.2.6",
+		"prettier": "^3.5.3",
+		"typescript": "^5.8.3"
+	}
 }
