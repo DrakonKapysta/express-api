@@ -5,6 +5,7 @@ import { IExeptionFilter } from "./errors/exeption.filter.interface";
 import { ILogger } from "./logger/logger.interface";
 import { inject, injectable } from "inversify";
 import { TYPES } from "./types";
+import { IUserController } from "./user/user.controller.interface";
 
 @injectable()
 export class App {
@@ -14,7 +15,7 @@ export class App {
 
   constructor(
     @inject(TYPES.ILogger) private logger: ILogger,
-    @inject(TYPES.UserController) private userController: UserController,
+    @inject(TYPES.UserController) private userController: IUserController,
     @inject(TYPES.ExeptionFilter) private exeptionFilter: IExeptionFilter
   ) {
     this.app = express();
@@ -22,7 +23,7 @@ export class App {
   }
 
   public useRoutes() {
-    this.app.use("/users", this.userController.router);
+    this.app.use("/users", this.userController.getRouter());
   }
 
   public useExeptionFilters() {
