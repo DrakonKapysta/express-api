@@ -16,12 +16,14 @@
 	"author": "Oleh Matyiokin",
 	"license": "ISC",
 	"dependencies": {
+		"bcryptjs": "^3.0.2",
 		"express": "^5.1.0",
 		"inversify": "^7.5.0",
 		"reflect-metadata": "^0.2.2",
 		"tslog": "^4.9.3"
 	},
 	"devDependencies": {
+		"@types/bcryptjs": "^2.4.6",
 		"@types/express": "^5.0.1",
 		"@typescript-eslint/eslint-plugin": "^8.29.1",
 		"@typescript-eslint/parser": "^8.29.1",

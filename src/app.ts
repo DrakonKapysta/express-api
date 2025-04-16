@@ -1,6 +1,5 @@
 import express, { Express } from "express";
 import { Server } from "http";
-import { UserController } from "./user/user.controller";
 import { IExeptionFilter } from "./errors/exeption.filter.interface";
 import { ILogger } from "./logger/logger.interface";
 import { inject, injectable } from "inversify";
@@ -30,7 +29,12 @@ export class App {
 		this.app.use(this.exeptionFilter.catch.bind(this.exeptionFilter));
 	}
 
+	public useMiddleware(): void {
+		this.app.use(express.json());
+	}
+
 	public async init(): Promise<void> {
+		this.useMiddleware();
 		this.useRoutes();
 		this.useExeptionFilters();
 		this.server = this.app.listen(this.port, () =>
