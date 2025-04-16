@@ -7,11 +7,14 @@ import { ILogger } from "./logger/logger.interface";
 import { TYPES } from "./types";
 import { IExeptionFilter } from "./errors/exeption.filter.interface";
 import { IUserController } from "./user/user.controller.interface";
+import { IUserService } from "./user/user.service.interface";
+import { UserService } from "./user/user.service";
 
 export const appModule = new ContainerModule((options: ContainerModuleLoadOptions) => {
 	options.bind<ILogger>(TYPES.ILogger).to(LoggerService);
 	options.bind<IUserController>(TYPES.UserController).to(UserController);
 	options.bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
+	options.bind<IUserService>(TYPES.UserService).to(UserService);
 	options.bind<App>(TYPES.Application).to(App);
 });
 
