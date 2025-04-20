@@ -9,13 +9,16 @@ import { IExeptionFilter } from "./errors/exeption.filter.interface";
 import { IUserController } from "./user/user.controller.interface";
 import { IUserService } from "./user/user.service.interface";
 import { UserService } from "./user/user.service";
+import { IConfigService } from "./config/config.service.interface";
+import { ConfigService } from "./config/config.service";
 
 export const appModule = new ContainerModule((options: ContainerModuleLoadOptions) => {
-	options.bind<ILogger>(TYPES.ILogger).to(LoggerService);
-	options.bind<IUserController>(TYPES.UserController).to(UserController);
-	options.bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter);
-	options.bind<IUserService>(TYPES.UserService).to(UserService);
-	options.bind<App>(TYPES.Application).to(App);
+	options.bind<ILogger>(TYPES.Logger).to(LoggerService).inSingletonScope();
+	options.bind<IUserController>(TYPES.UserController).to(UserController).inSingletonScope();
+	options.bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter).inSingletonScope();
+	options.bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
+	options.bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
+	options.bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
 
 async function bootstrap(): Promise<void> {
