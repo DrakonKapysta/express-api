@@ -24,7 +24,12 @@ export class UserController extends BaseController implements IUserController {
 				func: this.register,
 				middlewares: [new ValidateMiddleware(UserRegisterDto)],
 			},
-			{ path: "/login", method: "post", func: this.login },
+			{
+				path: "/login",
+				method: "post",
+				func: this.login,
+				middlewares: [new ValidateMiddleware(UserLoginDto)],
+			},
 		]);
 	}
 
@@ -32,9 +37,16 @@ export class UserController extends BaseController implements IUserController {
 		return this.router;
 	}
 
-	public login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
-		console.log(req.body);
-		next(new HTTPError(401, "Not authorized", "login"));
+	public async login(
+		req: Request<{}, {}, UserLoginDto>,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> {
+		const result = await this.userService.validateUser(req.body);
+		if (!result) {
+			return next(new HTTPError(401, "Not authorized, wrong password or email", "login"));
+		}
+		this.ok(res, { email: req.body.email });
 	}
 	public async register(
 		{ body }: Request<{}, {}, UserRegisterDto>,
@@ -45,6 +57,6 @@ export class UserController extends BaseController implements IUserController {
 		if (!result) {
 			return next(new HTTPError(422, "User already exists", "register"));
 		}
-		this.ok(res, result);
+		this.ok(res, { email: result.email, id: result.id });
 	}
 }

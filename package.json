@@ -10,6 +10,7 @@
 		"dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9229 -r ts-node/register src/main.ts",
 		"lint": "eslint \"./src/**/*.{ts,tsx}\"",
 		"lint:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix",
+		"prisma:generate": "npx prisma generate",
 		"build": "tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
