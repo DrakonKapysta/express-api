@@ -11,6 +11,9 @@ import { IUserService } from "./user/user.service.interface";
 import { UserService } from "./user/user.service";
 import { IConfigService } from "./config/config.service.interface";
 import { ConfigService } from "./config/config.service";
+import { PrismaService } from "./database/prisma/prisma.service";
+import { UserRepository } from "./user/user.repository";
+import { IUserRepository } from "./user/user.repository.interface";
 
 export const appModule = new ContainerModule((options: ContainerModuleLoadOptions) => {
 	options.bind<ILogger>(TYPES.Logger).to(LoggerService).inSingletonScope();
@@ -18,6 +21,8 @@ export const appModule = new ContainerModule((options: ContainerModuleLoadOption
 	options.bind<IExeptionFilter>(TYPES.ExeptionFilter).to(ExeptionFilter).inSingletonScope();
 	options.bind<IUserService>(TYPES.UserService).to(UserService).inSingletonScope();
 	options.bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
+	options.bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
+	options.bind<IUserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();
 	options.bind<App>(TYPES.Application).to(App).inSingletonScope();
 });
 
