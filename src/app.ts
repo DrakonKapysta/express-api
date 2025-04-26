@@ -7,6 +7,7 @@ import { TYPES } from "./types";
 import { IUserController } from "./user/user.controller.interface";
 import { IConfigService } from "./config/config.service.interface";
 import { PrismaService } from "./database/prisma/prisma.service";
+import { AuthMiddleware } from "./common/auth.middleware";
 
 @injectable()
 export class App {
@@ -35,6 +36,8 @@ export class App {
 
 	public useMiddleware(): void {
 		this.app.use(express.json());
+		const authMiddleware = new AuthMiddleware(this.configService.get("JWT_SECRET"));
+		this.app.use(authMiddleware.execute.bind(authMiddleware));
 	}
 
 	public async init(): Promise<void> {
