@@ -11,9 +11,9 @@ import { AuthMiddleware } from "./common/auth.middleware";
 
 @injectable()
 export class App {
-	app: Express;
-	server: Server;
-	port: number;
+	public app: Express;
+	public server: Server;
+	public port: number;
 
 	constructor(
 		@inject(TYPES.Logger) private logger: ILogger,
@@ -48,5 +48,9 @@ export class App {
 		this.server = this.app.listen(this.port, () =>
 			this.logger.log(`App is running on port ${this.port}`),
 		);
+	}
+
+	public close(): void {
+		this.server.close();
 	}
 }
